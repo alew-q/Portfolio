@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilo base del body */
+body {
+  @apply bg-[#020617] text-slate-100 antialiased;
+}
