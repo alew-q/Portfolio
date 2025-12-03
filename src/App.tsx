@@ -1,4 +1,3 @@
-// src/App.tsx
 import { useState } from 'react';
 import type { Lang } from './i18n';
 import { translations } from './i18n';

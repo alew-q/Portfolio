@@ -1,4 +1,3 @@
-// src/components/sections/Hero.tsx
 import { useEffect, useRef, useState } from 'react';
 import type { Translations } from '../../i18n';
 
@@ -18,8 +17,6 @@ export function Hero({ t }: { t: Translations }) {
       const windowHeight =
         window.innerHeight || document.documentElement.clientHeight;
 
-      // Cuando top = 0  -> distanceFromTop = 0
-      // Cuando top = -windowHeight -> distanceFromTop = windowHeight
       const distanceFromTop = Math.min(Math.max(-rect.top, 0), windowHeight);
       const progress = distanceFromTop / windowHeight; 
 
@@ -33,9 +30,8 @@ export function Hero({ t }: { t: Translations }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // 0 -> 1 (visible) | 1 -> 0 (invisible)
   const opacity = 1 - fadeProgress;
-  const translateY = fadeProgress * 24; // hasta ~24px hacia abajo cuando se va
+  const translateY = fadeProgress * 24;
 
   return (
     <section

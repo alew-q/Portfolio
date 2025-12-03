@@ -1,4 +1,3 @@
-// src/i18n.ts
 export type Lang = 'en' | 'es';
 
 export const translations = {
@@ -15,11 +14,11 @@ export const translations = {
       name: 'Alexander',
       role: 'Full Stack Developer',
       description:
-        'Crafting web platforms, intelligent systems & delightful experiences.',
+        'Transforming ideas into functional and attractive web applications.',
       ctaPrimary: 'Get in touch',
       ctaSecondary: 'LinkedIn',
-      availability: 'Available for internships / trainee positions',
-      location: 'Lima, Peru · Remote friendly',
+      availability: 'Available for internships',
+      location: 'Remote work / Hybrid',
       avatarLabel: 'Alexander',
     },
     sections: {
@@ -44,11 +43,11 @@ export const translations = {
       name: 'Alexander',
       role: 'Desarrollador Full Stack',
       description:
-        'Creación de plataformas web, sistemas inteligentes y experiencias placenteras.',
+        'Transformo ideas en aplicaciones web funcionales y atractivas.',
       ctaPrimary: 'Hablemos',
       ctaSecondary: 'LinkedIn',
-      availability: 'Disponible para prácticas / trainee',
-      location: 'Lima, Perú · Remote friendly',
+      availability: 'Disponible para prácticas',
+      location: 'Trabajo remoto / híbrido',
       avatarLabel: 'Alexander',
     },
     sections: {

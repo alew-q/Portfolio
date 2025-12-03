@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import {
   SiHtml5,
   SiCss3,
@@ -82,23 +83,59 @@ function getColumnTitle(id: ColumnId, t: Translations) {
 }
 
 export function TechStack({ t }: { t: Translations }) {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.25,
+      }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="border-t border-slate-800/60">
+    <section
+      id="tech"
+      ref={sectionRef}
+      className="border-t border-slate-800/60"
+    >
       <div className="mx-auto w-full max-w-6xl px-6 py-16">
         <h2 className="text-2xl font-semibold text-slate-50 mb-6">
           {t.sections.techStack}
         </h2>
 
         <div className="grid gap-8 md:grid-cols-4 text-sm text-slate-300">
-          {COLUMNS.map((col) => (
-            <div key={col.id}>
+          {COLUMNS.map((col, index) => (
+            <div
+              key={col.id}
+              className={`
+                transform transition-all duration-700 ease-out
+                ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}
+              `}
+              style={{
+                transitionDelay: isVisible ? `${index * 120}ms` : '0ms',
+              }}
+            >
               <h3 className="mb-3 text-sm font-semibold text-slate-100">
                 {getColumnTitle(col.id, t)}
               </h3>
 
               <ul className="space-y-2">
                 {col.items.map(({ name, icon: Icon }) => (
-                  <li key={name} className="flex items-center gap-3">
+                  <li
+                    key={name}
+                    className="flex items-center gap-3"
+                  >
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 border border-slate-700">
                       <Icon className="h-5 w-5 text-sky-400" />
                     </div>
