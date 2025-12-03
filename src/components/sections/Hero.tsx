@@ -1,14 +1,60 @@
 // src/components/sections/Hero.tsx
+import { useEffect, useRef, useState } from 'react';
 import type { Translations } from '../../i18n';
 
 export function Hero({ t }: { t: Translations }) {
   const heroAny = t.hero as any;
   const hasSplitRole = heroAny.rolePrimary && heroAny.roleSecondary;
 
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [fadeProgress, setFadeProgress] = useState(0); // 0 = visible, 1 = totalmente desvanecido
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const node = sectionRef.current;
+      if (!node) return;
+
+      const rect = node.getBoundingClientRect();
+      const windowHeight =
+        window.innerHeight || document.documentElement.clientHeight;
+
+      // Cuando top = 0  -> distanceFromTop = 0
+      // Cuando top = -windowHeight -> distanceFromTop = windowHeight
+      const distanceFromTop = Math.min(Math.max(-rect.top, 0), windowHeight);
+      const progress = distanceFromTop / windowHeight; 
+
+      setFadeProgress(progress);
+    };
+
+    // Calcular una vez al cargar
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // 0 -> 1 (visible) | 1 -> 0 (invisible)
+  const opacity = 1 - fadeProgress;
+  const translateY = fadeProgress * 24; // hasta ~24px hacia abajo cuando se va
+
   return (
-    <section id="home" className="min-h-screen flex items-center">
+    <section
+      id="home"
+      ref={sectionRef}
+      className="min-h-screen flex items-center"
+    >
       <div className="mx-auto w-full max-w-6xl px-6 pt-24 pb-16 grid gap-12 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-center">
-        <div className="space-y-7">
+        {/* Columna de texto */}
+        <div
+          className={`
+            space-y-7
+            transition-all duration-200 ease-out
+          `}
+          style={{
+            opacity,
+            transform: `translateY(${translateY}px)`,
+          }}
+        >
           <p className="text-lg sm:text-xl font-semibold text-sky-300 tracking-tight">
             {t.hero.hi}{' '}
             <span className="text-slate-50">{t.hero.name} </span>
@@ -72,7 +118,17 @@ export function Hero({ t }: { t: Translations }) {
           </div>
         </div>
 
-        <div className="flex justify-center md:justify-end">
+        {/* Columna del avatar */}
+        <div
+          className={`
+            flex justify-center md:justify-end
+            transition-all duration-200 ease-out
+          `}
+          style={{
+            opacity,
+            transform: `translateY(${translateY}px)`,
+          }}
+        >
           <div className="relative">
             <div className="h-52 w-52 rounded-full bg-gradient-to-tr from-sky-500 via-cyan-400 to-blue-600 p-[3px] shadow-[0_0_40px_rgba(56,189,248,0.4)]">
               <div className="h-full w-full rounded-full bg-[#020617] flex flex-col items-center justify-center gap-2">
@@ -80,8 +136,6 @@ export function Hero({ t }: { t: Translations }) {
                 <span className="text-xs text-slate-300">{t.hero.avatarLabel}</span>
               </div>
             </div>
-
-
           </div>
         </div>
       </div>

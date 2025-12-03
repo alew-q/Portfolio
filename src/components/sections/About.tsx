@@ -5,12 +5,12 @@ export function About() {
         <div className="space-y-4 text-sm text-slate-300">
           <h2 className="text-2xl font-semibold text-slate-50 mb-4">Sobre mí</h2>
           <p>
-            Soy un desarrollador full stack con experiencia en la creación de sistemas web modernos,
+            Desarrollador full stack con experiencia en la creación de sistemas web modernos,
             automatización de procesos y soluciones de Business Intelligence. Mi pasión es construir
             aplicaciones que resuelvan problemas reales.
           </p>
           <p>
-            Actualmente estoy cursando Ingeniería Informática en Perú y he trabajado en diversos
+            Actualmente estoy cursando Ingeniería Informática en la Universidad Peruana Cayetano Heredia y he trabajado en diversos
             proyectos que van desde ticketing hasta registros médico de pacientes.
           </p>
         </div>
