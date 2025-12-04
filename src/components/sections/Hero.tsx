@@ -98,9 +98,8 @@ export function Hero({ t }: { t: Translations }) {
               {t.hero.ctaPrimary}
             </a>
             <a
-              href="https://www.linkedin.com"
-              target="_blank"
-              rel="noreferrer"
+              href="src\assets\cv_personal.pdf" 
+              download
               className="inline-flex items-center justify-center rounded-md border border-sky-500 px-5 py-2 text-sm font-semibold text-sky-400 hover:bg-sky-500/10 transition-colors"
             >
               {t.hero.ctaSecondary}

@@ -1,7 +1,9 @@
+// src/components/sections/Contact.tsx
 import { useEffect, useRef, useState } from 'react';
 import { FiMail, FiLinkedin, FiGithub } from 'react-icons/fi';
+import type { Translations } from '../../i18n';
 
-export function Contact() {
+export function Contact({ t }: { t: Translations }) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -36,10 +38,12 @@ export function Contact() {
           ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}
         `}
       >
-        <h2 className="text-2xl font-semibold text-slate-50 mb-4">¿Hablamos?</h2>
+        <h2 className="text-2xl font-semibold text-slate-50 mb-4">
+          {t.contactSection.title}
+        </h2>
+
         <p className="text-sm text-slate-300 mb-6 max-w-xl">
-          Estoy siempre disponible para discutir proyectos, oportunidades o simplemente
-          conversar sobre tecnología.
+          {t.contactSection.intro}
         </p>
 
         <div className="flex flex-wrap gap-3 text-sm">
@@ -54,7 +58,7 @@ export function Contact() {
             "
           >
             <FiMail className="h-4 w-4" />
-            <span>Enviar email</span>
+            <span>{t.contactSection.emailLabel}</span>
           </a>
 
           {/* LinkedIn */}
@@ -70,7 +74,7 @@ export function Contact() {
             "
           >
             <FiLinkedin className="h-4 w-4" />
-            <span>LinkedIn</span>
+            <span>{t.contactSection.linkedinLabel}</span>
           </a>
 
           {/* GitHub */}
@@ -86,7 +90,7 @@ export function Contact() {
             "
           >
             <FiGithub className="h-4 w-4" />
-            <span>GitHub</span>
+            <span>{t.contactSection.githubLabel}</span>
           </a>
         </div>
       </div>

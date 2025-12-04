@@ -4,6 +4,7 @@ type ProjectCardProps = {
   description: string;
   tags: string[];
   onOpen: () => void;
+  viewDetailsLabel: string; // 👈 nuevo
 };
 
 export function ProjectCard({
@@ -12,6 +13,7 @@ export function ProjectCard({
   description,
   tags,
   onOpen,
+  viewDetailsLabel,
 }: ProjectCardProps) {
   return (
     <article
@@ -25,7 +27,10 @@ export function ProjectCard({
     >
       <h3 className="font-semibold text-slate-50 mb-1">{title}</h3>
       <p className="text-xs text-slate-400 mb-3">{subtitle}</p>
-      <p className="text-xs text-slate-300 mb-3 whitespace-pre-line">{description}</p>
+
+      <p className="text-xs text-slate-300 mb-3 whitespace-pre-line">
+        {description}
+      </p>
 
       <div className="flex flex-wrap gap-2 text-[11px] mb-4">
         {tags.map((tag) => (
@@ -41,12 +46,12 @@ export function ProjectCard({
       <button
         type="button"
         onClick={(e) => {
-          e.stopPropagation(); 
+          e.stopPropagation();
           onOpen();
         }}
         className="text-[11px] font-medium text-sky-400 hover:text-sky-300"
       >
-        Ver detalles →
+        {viewDetailsLabel} →
       </button>
     </article>
   );
