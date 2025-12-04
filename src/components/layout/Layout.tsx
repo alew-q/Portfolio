@@ -17,7 +17,7 @@ export function Layout({ lang, t, onChangeLang, children }: Props) {
 
       <main>{children}</main>
 
-      <Footer />
+      <Footer t={t} />
     </div>
   );
 }

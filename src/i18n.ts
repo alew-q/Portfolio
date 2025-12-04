@@ -135,6 +135,59 @@ export const translations = {
         },
       ],
     },
+    contactSection: {
+      title: "Let's talk",
+      intro:
+        'I’m always open to discuss projects, opportunities, or simply talk about technology.',
+      emailLabel: 'Send email',
+      linkedinLabel: 'LinkedIn',
+      githubLabel: 'GitHub',
+    },
+
+    certificationsSection: {
+      title: 'Certifications',
+      items: {
+        remoteWork: {
+          title: 'Remote Work Professional',
+          org: 'CertiProf',
+          date: 'Dec 2025',
+        },
+        cybersecurity: {
+          title: 'Introduction to Cybersecurity',
+          org: 'Cisco Networking Academy',
+          date: 'Nov 2025',
+        },
+        scrum: {
+          title: 'Scrum Foundation',
+          org: 'CertiProf',
+          date: 'Sep 2023',
+        },
+        gitGithub: {
+          title: 'Git and GitHub',
+          org: 'Oracle Alura Latam',
+          date: 'Jan 2025',
+        },
+        htmlCssJs: {
+          title: 'HTML, CSS and JavaScript',
+          org: 'Oracle Alura Latam',
+          date: 'Jan 2025',
+        },
+        bi: {
+          title: 'Business Intelligence Foundation',
+          org: 'CertiProf',
+          date: 'Sep 2024',
+        },
+        aws: {
+          title: 'AWS Academy Cloud Foundations',
+          org: 'AWS',
+          date: 'Jun 2023',
+        },
+      },
+    },
+
+    footer: {
+      rights: 'All rights reserved.',
+    },
   },
 
   // ─────────────────────────────────────────────────────────────
@@ -273,6 +326,59 @@ export const translations = {
           ],
         },
       ],
+    },
+
+    contactSection: {
+      title: '¿Hablamos?',
+      intro:
+        'Siempre estoy disponible para conversar sobre proyectos, oportunidades o simplemente hablar de tecnología.',
+      emailLabel: 'Enviar email',
+      linkedinLabel: 'LinkedIn',
+      githubLabel: 'GitHub',
+    },
+
+    certificationsSection: {
+      title: 'Certificaciones',
+      items: {
+        remoteWork: {
+          title: 'Remote Work Professional',
+          org: 'CertiProf',
+          date: 'Dic 2025',
+        },
+        cybersecurity: {
+          title: 'Introduction to Cybersecurity',
+          org: 'Cisco Networking Academy',
+          date: 'Nov 2025',
+        },
+        scrum: {
+          title: 'Scrum Foundation',
+          org: 'CertiProf',
+          date: 'Sep 2023',
+        },
+        gitGithub: {
+          title: 'Git y GitHub',
+          org: 'Oracle Alura Latam',
+          date: 'Ene 2025',
+        },
+        htmlCssJs: {
+          title: 'HTML, CSS y JavaScript',
+          org: 'Oracle Alura Latam',
+          date: 'Ene 2025',
+        },
+        bi: {
+          title: 'Business Intelligence Foundation',
+          org: 'CertiProf',
+          date: 'Sep 2024',
+        },
+        aws: {
+          title: 'AWS Academy Cloud Foundations',
+          org: 'AWS',
+          date: 'Jun 2023',
+        },
+      },
+    },
+    footer: {
+      rights: 'Todos los derechos reservados.',
     },
   },
 } as const;

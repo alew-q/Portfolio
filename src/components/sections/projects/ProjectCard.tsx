@@ -4,7 +4,7 @@ type ProjectCardProps = {
   description: string;
   tags: string[];
   onOpen: () => void;
-  viewDetailsLabel: string; // 👈 nuevo
+  viewDetailsLabel: string;
 };
 
 export function ProjectCard({

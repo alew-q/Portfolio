@@ -153,7 +153,6 @@ export function About({ t }: { t: Translations }) {
             `}
             style={{ transitionDelay: isVisible ? '120ms' : '0ms' }}
           >
-            {/* mismo estilo de título que "Sobre mí" */}
             <h2 className="text-2xl font-semibold text-slate-50 mb-2">
               {t.sections.techStack}
             </h2>
@@ -177,7 +176,6 @@ export function About({ t }: { t: Translations }) {
                     {getColumnTitle(col.id, t)}
                   </h4>
 
-                  {/* Chips compactos: FRONTEND -> HTML CSS JS ... */}
                   <div className="flex flex-wrap gap-2">
                     {col.items.map(({ name, icon: Icon }) => (
                       <span

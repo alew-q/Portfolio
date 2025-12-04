@@ -1,4 +1,3 @@
-// src/components/sections/Experience.tsx
 import { useEffect, useRef, useState } from 'react';
 import type { Translations } from '../../i18n';
 
@@ -23,7 +22,6 @@ export function Experience({ t }: { t: Translations }) {
     return () => observer.disconnect();
   }, []);
 
-  // Tomamos la experiencia desde las traducciones
   const experiences = t.experienceSection.items;
 
   return (

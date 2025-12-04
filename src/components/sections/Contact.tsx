@@ -1,4 +1,3 @@
-// src/components/sections/Contact.tsx
 import { useEffect, useRef, useState } from 'react';
 import { FiMail, FiLinkedin, FiGithub } from 'react-icons/fi';
 import type { Translations } from '../../i18n';
@@ -13,7 +12,6 @@ export function Contact({ t }: { t: Translations }) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Aparece al entrar y se esconde al salir
         setIsVisible(entry.isIntersecting);
       },
       {
@@ -79,7 +77,7 @@ export function Contact({ t }: { t: Translations }) {
 
           {/* GitHub */}
           <a
-            href="https://github.com"
+            href="https://github.com/alew-q"
             target="_blank"
             rel="noreferrer"
             className="

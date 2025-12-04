@@ -52,7 +52,6 @@ export function Projects({ t }: { t: Translations }) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Efecto de aparición / desvanecimiento de la sección
   useEffect(() => {
     const node = sectionRef.current;
     if (!node) return;
@@ -128,7 +127,7 @@ export function Projects({ t }: { t: Translations }) {
             onClose={() => setOpenId(null)}
             title={openProjectText.title}
             description={openProjectText.description}
-            features={openProjectText.features}
+            features={[...openProjectText.features]}
             stack={openProjectConfig.stack}
             images={openProjectConfig.images}
           />

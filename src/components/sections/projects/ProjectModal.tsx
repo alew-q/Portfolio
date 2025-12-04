@@ -22,7 +22,6 @@ export function ProjectModal({
   const [activeIndex, setActiveIndex] = useState(0);
   const [showZoom, setShowZoom] = useState(false);
 
-  // Bloquear scroll del body solo cuando el modal está abierto
   useEffect(() => {
     if (!open) return;
 
@@ -34,12 +33,15 @@ export function ProjectModal({
     };
   }, [open]);
 
-  // Resetear imagen activa y zoom cuando se abre/cambia de proyecto
   useEffect(() => {
-    if (open) {
+    if (!open) return;
+
+    const id = setTimeout(() => {
       setActiveIndex(0);
       setShowZoom(false);
-    }
+    }, 0);
+
+    return () => clearTimeout(id);
   }, [open, title]);
 
   if (!open) return null;
@@ -96,7 +98,11 @@ export function ProjectModal({
                         onClick={() => setActiveIndex(idx)}
                         className={`
                           overflow-hidden rounded-md border
-                          ${isActive ? 'border-sky-500 bg-slate-800' : 'border-slate-700 bg-slate-900'}
+                          ${
+                            isActive
+                              ? 'border-sky-500 bg-slate-800'
+                              : 'border-slate-700 bg-slate-900'
+                          }
                         `}
                       >
                         <img
@@ -140,7 +146,7 @@ export function ProjectModal({
         </div>
       </div>
 
-      {/* Overlay de zoom (imagen grande) */}
+      {/* Modal de zoom */}
       {showZoom && hasImages && (
         <div
           className="fixed inset-0 z-40 flex items-center justify-center bg-black/80"

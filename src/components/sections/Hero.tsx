@@ -1,14 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Translations } from '../../i18n';
+import cvPersonal from "../../assets/cv_personal.pdf"
+
+type HeroContent = Translations['hero'] & {
+  rolePrimary?: string;
+  roleSecondary?: string;
+};
 
 export function Hero({ t }: { t: Translations }) {
-  const heroAny = t.hero as any;
-  const hasSplitRole = heroAny.rolePrimary && heroAny.roleSecondary;
+  const hero = t.hero as HeroContent;
+  const hasSplitRole = Boolean(hero.rolePrimary && hero.roleSecondary);
 
   const sectionRef = useRef<HTMLElement | null>(null);
-  const [fadeProgress, setFadeProgress] = useState(0); // 0 = visible, 1 = totalmente desvanecido
+  const [fadeProgress, setFadeProgress] = useState(0);
+  const [mounted, setMounted] = useState(false); 
 
   useEffect(() => {
+    const timeout = setTimeout(() => setMounted(true), 0);
+
     const handleScroll = () => {
       const node = sectionRef.current;
       if (!node) return;
@@ -18,20 +27,25 @@ export function Hero({ t }: { t: Translations }) {
         window.innerHeight || document.documentElement.clientHeight;
 
       const distanceFromTop = Math.min(Math.max(-rect.top, 0), windowHeight);
-      const progress = distanceFromTop / windowHeight; 
+      const progress = distanceFromTop / windowHeight;
 
       setFadeProgress(progress);
     };
 
-    // Calcular una vez al cargar
     handleScroll();
-
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
-  const opacity = 1 - fadeProgress;
-  const translateY = fadeProgress * 24;
+  const baseOpacity = 1 - fadeProgress; 
+  const baseTranslateY = fadeProgress * 24;
+
+  const currentOpacity = mounted ? baseOpacity : 0;
+  const currentTranslateY = mounted ? baseTranslateY : 24;
 
   return (
     <section
@@ -44,16 +58,16 @@ export function Hero({ t }: { t: Translations }) {
         <div
           className={`
             space-y-7
-            transition-all duration-200 ease-out
+            transition-all duration-300 ease-out
           `}
           style={{
-            opacity,
-            transform: `translateY(${translateY}px)`,
+            opacity: currentOpacity,
+            transform: `translateY(${currentTranslateY}px)`,
           }}
         >
           <p className="text-lg sm:text-xl font-semibold text-sky-300 tracking-tight">
-            {t.hero.hi}{' '}
-            <span className="text-slate-50">{t.hero.name} </span>
+            {hero.hi}{' '}
+            <span className="text-slate-50">{hero.name} </span>
           </p>
 
           {/* Título principal con gradiente animado */}
@@ -68,8 +82,8 @@ export function Hero({ t }: { t: Translations }) {
                   animate-gradient-move
                 "
               >
-                {heroAny.rolePrimary}{' '}
-                <span className="font-black">{heroAny.roleSecondary}</span>
+                {hero.rolePrimary}{' '}
+                <span className="font-black">{hero.roleSecondary}</span>
               </span>
             ) : (
               <span
@@ -81,13 +95,13 @@ export function Hero({ t }: { t: Translations }) {
                   animate-gradient-move
                 "
               >
-                {t.hero.role}
+                {hero.role}
               </span>
             )}
           </h1>
 
           <p className="max-w-xl text-sm sm:text-base text-slate-300">
-            {t.hero.description}
+            {hero.description}
           </p>
 
           <div className="flex flex-wrap gap-3">
@@ -95,21 +109,21 @@ export function Hero({ t }: { t: Translations }) {
               href="#contact"
               className="inline-flex items-center justify-center rounded-md bg-sky-500 px-5 py-2 text-sm font-semibold text-slate-950 hover:bg-sky-400 transition-colors"
             >
-              {t.hero.ctaPrimary}
+              {hero.ctaPrimary}
             </a>
             <a
-              href="src\assets\cv_personal.pdf" 
+              href={cvPersonal}
               download
               className="inline-flex items-center justify-center rounded-md border border-sky-500 px-5 py-2 text-sm font-semibold text-sky-400 hover:bg-sky-500/10 transition-colors"
             >
-              {t.hero.ctaSecondary}
+              {hero.ctaSecondary}
             </a>
           </div>
 
           <div className="flex flex-wrap gap-4 text-xs sm:text-sm text-slate-400">
-            <span>{t.hero.availability}</span>
+            <span>{hero.availability}</span>
             <span className="h-1 w-1 rounded-full bg-sky-500 inline-block align-middle mx-1" />
-            <span>{t.hero.location}</span>
+            <span>{hero.location}</span>
           </div>
         </div>
 
@@ -117,18 +131,20 @@ export function Hero({ t }: { t: Translations }) {
         <div
           className={`
             flex justify-center md:justify-end
-            transition-all duration-200 ease-out
+            transition-all duration-300 ease-out
           `}
           style={{
-            opacity,
-            transform: `translateY(${translateY}px)`,
+            opacity: currentOpacity,
+            transform: `translateY(${currentTranslateY}px)`,
           }}
         >
           <div className="relative">
             <div className="h-52 w-52 rounded-full bg-gradient-to-tr from-sky-500 via-cyan-400 to-blue-600 p-[3px] shadow-[0_0_40px_rgba(56,189,248,0.4)]">
               <div className="h-full w-full rounded-full bg-[#020617] flex flex-col items-center justify-center gap-2">
                 <span className="text-4xl">AS</span>
-                <span className="text-xs text-slate-300">{t.hero.avatarLabel}</span>
+                <span className="text-xs text-slate-300">
+                  {hero.avatarLabel}
+                </span>
               </div>
             </div>
           </div>
