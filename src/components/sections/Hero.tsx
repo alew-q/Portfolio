@@ -1,19 +1,34 @@
+// src/components/sections/Hero.tsx
 import { useEffect, useRef, useState } from 'react';
-import type { Translations } from '../../i18n';
-import cvPersonal from "../../assets/cv_personal.pdf"
+import type { Translations, Lang } from '../../i18n';
+
+import cvEs from '../../assets/cv_personal_es.pdf';
+import cvEn from '../../assets/cv_personal_en.pdf';
 
 type HeroContent = Translations['hero'] & {
   rolePrimary?: string;
   roleSecondary?: string;
 };
 
-export function Hero({ t }: { t: Translations }) {
+type HeroProps = {
+  t: Translations;
+  lang: Lang;
+};
+
+export function Hero({ t, lang }: HeroProps) {
   const hero = t.hero as HeroContent;
   const hasSplitRole = Boolean(hero.rolePrimary && hero.roleSecondary);
 
   const sectionRef = useRef<HTMLElement | null>(null);
   const [fadeProgress, setFadeProgress] = useState(0);
-  const [mounted, setMounted] = useState(false); 
+  const [mounted, setMounted] = useState(false);
+
+  // Elegir CV según idioma
+  const cvFile = lang === 'en' ? cvEn : cvEs;
+  const cvFilename =
+    lang === 'en'
+      ? 'Alexander_Sirlupu_CV_EN.pdf'
+      : 'Alexander_Sirlupu_CV_ES.pdf';
 
   useEffect(() => {
     const timeout = setTimeout(() => setMounted(true), 0);
@@ -41,7 +56,7 @@ export function Hero({ t }: { t: Translations }) {
     };
   }, []);
 
-  const baseOpacity = 1 - fadeProgress; 
+  const baseOpacity = 1 - fadeProgress;
   const baseTranslateY = fadeProgress * 24;
 
   const currentOpacity = mounted ? baseOpacity : 0;
@@ -112,8 +127,8 @@ export function Hero({ t }: { t: Translations }) {
               {hero.ctaPrimary}
             </a>
             <a
-              href={cvPersonal}
-              download
+              href={cvFile}
+              download={cvFilename}
               className="inline-flex items-center justify-center rounded-md border border-sky-500 px-5 py-2 text-sm font-semibold text-sky-400 hover:bg-sky-500/10 transition-colors"
             >
               {hero.ctaSecondary}

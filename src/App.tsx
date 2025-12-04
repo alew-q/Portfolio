@@ -18,7 +18,7 @@ function App() {
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100">
       <Layout lang={lang} t={t} onChangeLang={setLang}>
         <div key={lang}>
-          <Hero t={t} />
+          <Hero t={t} lang={lang} />
           <About t={t} />
           <Experience t={t} />
           <Projects t={t} />
